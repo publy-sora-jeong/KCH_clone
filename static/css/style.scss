@@ -1,0 +1,42 @@
+/*
+    CSS
+    ├------ base    //mixin, reset
+    ├------ layout  //header, footer, main
+    ├------ modules //vendor
+    ┗------ pages   //contents
+*/
+
+
+//BASE 
+@import 'base/mixins';
+@import 'base/reset';
+@import 'base/vars';
+
+//vendor 
+@import url('./modules/jquery.fullpage.min.css');
+@import url('modules/swiper.css');
+
+//layout
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/main'
+
+
+//componenets
+// @import 'componenets/select';
+// @import 'componenets/radiobox';
+// @import 'componenets/checkbox';
+// @import 'componenets/button';
+// @import 'componenets/input';
+// @import 'componenets/nouislider';
+// @import 'componenets/popup';
+// @import 'componenets/table';
+
+//board
+// @import 'modules/board';
+// @import 'modules/button';
+// @import 'modules/gallery_list';
+// @import 'modules/gallery_view';
+// @import 'modules/pagination';
+// @import 'modules/comments';
+

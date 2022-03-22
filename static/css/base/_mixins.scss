@@ -1,0 +1,172 @@
+//font-smoothing: antialiased;
+
+//font-face
+//e.g ) @include font-face("MyFont", "path/to/MyFont", $style: normal, $weight: normal);
+@mixin font-face($font-name, $file-name, $weight: normal, $style: normal) {
+	@font-face {
+		font-family: quote($font-name);
+		//src: url($file-name + ".eot");
+		src: 
+			//url($file-name + ".eot?#iefix") format("embedded-opentype"),
+			url($file-name + ".woff") format("woff"),
+			url($file-name + ".woff2") format("woff2");
+            //url($file-name + ".ttf") format("truetype"),
+            //url($file-name + ".svg##{$font-name}") format("svg");
+		font-weight: $weight;
+		font-style: $style;
+	}
+}
+
+@mixin pseudo($display: block, $pos: absolute, $content: "") {
+	content: $content;
+	display: $display;
+	position: $pos;
+}
+
+//@include push--auto; 
+@mixin push--auto {
+	margin: {
+		left: auto;
+		right: auto;
+	}
+}
+
+//@include push--center;
+@mixin push--center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+//@include flex-center; 
+@mixin flex-center { 
+	display: flex; 
+	justify-content: center; 
+	align-items: center;
+}
+
+// @include responsive-ratio(16,9);
+// commonly utilised by video
+@mixin responsive-ratio($x, $y, $pseudo: false) {
+	$padding: unquote(($y / $x) * 100 + "%");
+
+	@if $pseudo {
+		&:before {
+			@include pseudo($pos: relative);
+			width: 100%;
+			padding-top: $padding;
+		}
+	} @else {
+		padding-top: $padding;
+	}
+}
+
+@mixin ellipsis($truncation-boundary) {
+	max-width: $truncation-boundary;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+//@include ellipsis-milti(max-height, line-clamp)
+@mixin ellipsis-milti($max-height, $line-clamp) {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $clamp; 
+    -webkit-box-orient: vertical;
+    max-height: $max-height;
+}
+
+//clearfix
+//e.g ) .eg { @include clearfix; }
+@mixin clearfix {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+
+//@include IR; 
+@mixin IR{ 
+	position: absolute;
+	clip: rect(0 0 0 0);
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+}
+
+//@include retina {	background-image: url(../img/background@2x.png);}
+@mixin retina {
+	@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+	only screen and (-moz-min-device-pixel-ratio: 1.5),
+	only screen and (-o-min-device-pixel-ratio: 3 / 2),
+	only screen and (min-device-pixel-ratio: 1.5),
+	only screen and (min-resolution: 1.5dppx) {
+		@content;
+	}
+}
+//gradient
+// @include gradient(#07c, #06f, vertical); 
+@mixin gradient($start-color, $end-color, $orientation) {
+	background: $start-color;
+	@if $orientation == "vertical" {
+		background: -webkit-linear-gradient(top, $start-color, $end-color);
+		background: linear-gradient(to bottom, $start-color, $end-color);
+	} @else if $orientation == "horizontal" {
+		background: -webkit-linear-gradient(left, $start-color, $end-color);
+		background: linear-gradient(to right, $start-color, $end-color);
+	} @else {
+		background: -webkit-radial-gradient(
+			center,
+			ellipse cover,
+			$start-color,
+			$end-color
+		);
+		background: radial-gradient(ellipse at center, $start-color, $end-color);
+	}
+}
+$breakpoints: (
+	"phone": 360px,
+	"phone-mid": 414px,
+	"phone-wide": 480px,
+	"phablet": 560px,
+	"tablet-small": 640px,
+	"tablet": 768px,
+	"tablet2": 830px,
+	"tablet-wide": 1024px,
+	"contents": 1200px,
+	"custom14": 1440px,
+	"custom19": 1920px,
+);
+
+@mixin mq($width, $type: max) {
+	@if map_has_key($breakpoints, $width) {
+		$width: map_get($breakpoints, $width);
+
+		@if $type==max {
+			$width: $width;
+		}
+
+		@media screen and (#{$type}-width: $width) {
+			@content;
+		}
+	}
+}
+
+
+//@include bg('image.png' , center, center, cover);
+@mixin bg($bgUrl, $posX:center, $posY:center, $size:cover, $color:transparent) {
+	background-repeat: no-repeat;
+	//background-size: cover;
+	background-size: $size; 
+	background-position: $posX $posY;
+	background-image: url($bgUrl);
+	background-color: $color; 
+}
+
+
