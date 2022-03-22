@@ -144,6 +144,9 @@ $breakpoints: (
 	"custom19": 1920px,
 );
 
+
+// $type : max ( desktop first) 
+// $type : min ( mobile first) 
 @mixin mq($width, $type: max) {
 	@if map_has_key($breakpoints, $width) {
 		$width: map_get($breakpoints, $width);
@@ -168,5 +171,3 @@ $breakpoints: (
 	background-image: url($bgUrl);
 	background-color: $color; 
 }
-
-

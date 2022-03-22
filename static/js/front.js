@@ -6,9 +6,11 @@
 
     window.addEventListener('load', () => {
         setViewHeight();
-        langSelect();
-        skipContents();
+        //skipContents();
+
     });
+
+
     window.addEventListener('resize', () => {
         setViewHeight();
     });
@@ -20,6 +22,14 @@
         navigationPosition: 'left',
         //normalScrollElements: '.section-footer', 
         //fixedElements: 'footer',
+
+        //accessibility options
+        keyboardScrolling: true,
+        animateAnchor: true,
+        recordHistory: true,
+    
+
+        
 
         afterLoad: function (anchorLink, index) {
             $('.business--txt .swiper-slide').removeClass('text-ani');
@@ -50,10 +60,12 @@
 
             if (index == 3) {
                 $('.merit-lines li').addClass('in');
+                $('.merit-list li').addClass('in');
                 meritCounter();
                 animate_merit();
             } else {
                 $('.merit-lines li').removeClass('in')
+                $('.merit-list li').removeClass('in');
             }
 
             if (index == 4) {
@@ -242,12 +254,12 @@
 
 
     //MENU
-
     const clickElems = {
         menu: document.querySelector('.js-open-menu'),
         closeMenu: document.querySelector('.js-close-menu'),
+        langSelect: document.querySelector('.js-click-lang'),
     }
-    const menuElem = {
+    const Elem = {
         //sitemap animate
         allMenu: document.querySelector('.allmenu'),
         allMenuInner: document.querySelector('.allmenu-inner'),
@@ -275,7 +287,7 @@
                 }
 
                 //GNB CLOSE
-                if (element === clickElems.closeMenu) {
+                else if (element === clickElems.closeMenu) {
                     clearInterval(timer);
                     $('.left-bg').stop().animate({
                         width: 0
@@ -294,11 +306,21 @@
                         'stroke-dashoffset': 150
                     });
                 }
+
+                //LANGUAGE SELECT
+                else if (element === clickElems.langSelect) {
+                    $('.lang-select .list').stop().slideDown();
+
+                    $('.lang-select .list').on('mouseleave focusout', function () {
+                        $('.lang-select .list').stop().slideUp();
+                    });
+                }
             });
         }
     }
 
 })();
+
 
 
 //common - set viewport height(100%)
@@ -307,22 +329,14 @@ function setViewHeight() {
     document.documentElement.style.setProperty('--vh', `${vh}px`);
 }
 
-//common - language select
-function langSelect() {
-    $('.lang-select button').on('click', function () {
-        $(this).next('.lang-select .list').stop().slideDown()
-    });
-    $('.lang-select .list').on('mouseleave focusout', function () {
-        $('.lang-select .list').stop().slideUp();
-    });
-}
+
 
 //main - section-merit number counter 
 function meritCounter() {
     $('.merit-list .num').each(function () {
         $(this).text(Number($(this).attr('data-num')));
 
-        $(this).prop('Counter', 0).animate({
+        $(this).prop('Counter', 0).stop().delay(400).animate({
             Counter: $(this).text()
         }, {
             duration: 2000,
@@ -338,24 +352,29 @@ function meritCounter() {
 }
 
 function skipContents() {
-    $(".skiptoContent").focusin(function () {
-        $(this).animate({
-                top: 0,
-                height: 30,
-                opacity: 1,
-            },
-            0
-        );
-    });
-    $(".skiptoContent").focusout(function () {
-        $(this).animate({
-                top: -30,
-                height: 0,
-                opacity: 0,
-            },
-            150
-        );
-    });
+    // $(".skiptoContent").on('focusin  keydown  keyup', function () {
+    //     $(this).animate({
+    //             top: 0,
+    //         },
+    //         0
+    //     );
+    // })
+    // // $(".skiptoContent").focusin(function () {
+    // //     $(this).animate({
+    // //             top: 0,
+    // //             height: 30,
+    // //             opacity: 1,
+    // //         },
+    // //         0
+    // //     );
+    // // });
+    // $(".skiptoContent").focusout(function () {
+    //     $(this).animate({
+    //             top: -50,
+    //         },
+    //         150
+    //     );
+    // });
 }
 
 

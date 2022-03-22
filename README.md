@@ -36,7 +36,6 @@ KCH-a key leader in future energy businesses, UI clone
 
 <h2>🥨</h2> 
 
-* 접근성
 * 일부 섹션에서 스크롤이 막혀버리는 현상
 * section2(biz) 타이틀~ 부분 덜컹거림 ..? 
 * 맵 포인터 위치안맞음 
