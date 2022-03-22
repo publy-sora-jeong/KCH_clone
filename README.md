@@ -1,7 +1,9 @@
 # KCH_clone
 KCH-a key leader in future energy businesses, UI clone 
-<br /><br />
-[클론 데모사이트] 👉 ] http://www.test.com
+<br />
+
+<a href="https://syriana.cafe24.com/KCH/" title="데모사이트 이동">👉 데모사이트 바로가기</a>  
+
 
 <br/><br/><br/>
 
@@ -36,12 +38,11 @@ KCH-a key leader in future energy businesses, UI clone
 
 <h2>🥨</h2> 
 
-* 접근성
-* 일부 섹션에서 스크롤이 막혀버리는 현상
+* x 
 * section2(biz) 타이틀~ 부분 덜컹거림 ..? 
 * 맵 포인터 위치안맞음 
 * 애니메이션 추가 
-* 등등.. ! 
+* ... 
 
 
 <br/><br/><br/>
